@@ -15,10 +15,18 @@ $(VENV_NAME): api/requirements.txt
 	touch $@
 
 docker-build:
-	docker build . -t $(REPO_NAME):$(VERSION)
+	docker build . --platform linux/amd64 -t $(REPO_NAME):$(VERSION)
+
+# for running on ARM systems
+docker-build-arm:
+	docker build . -t $(REPO_NAME):$(VERSION)-arm
 
 docker-run:
 	docker run -d --name $(CONTAINER_NAME) -p 8080:80 $(REPO_NAME):$(VERSION)
+
+# for running on ARM systems
+docker-run-arm:
+	docker run -d --name $(CONTAINER_NAME) -p 8080:80 $(REPO_NAME):$(VERSION)-arm
 
 .PHONY: clean
 clean:
