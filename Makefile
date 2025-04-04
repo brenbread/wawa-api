@@ -1,5 +1,7 @@
 SHELL := /bin/bash -e -o pipefail
 
+REPO_NAME := brenbread/wawa-api
+CONTAINER_NAME := wawa-api
 VERSION := 0.1.0
 VENV_NAME := venv
 
@@ -13,10 +15,10 @@ $(VENV_NAME): api/requirements.txt
 	touch $@
 
 docker-build:
-	docker build . -t wawa-api:$(VERSION)
+	docker build . -t $(REPO_NAME):$(VERSION)
 
 docker-run:
-	docker run -d --name wawa-api -p 8080:80 wawa-api:0.1.0
+	docker run -d --name $(CONTAINER_NAME) -p 8080:80 $(REPO_NAME):$(VERSION)
 
 .PHONY: clean
 clean:
