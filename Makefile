@@ -15,8 +15,8 @@ $(VENV_NAME): api/requirements.txt
 docker-build:
 	docker build . -t wawa-api:$(VERSION)
 
-run:
-
+docker-run:
+	docker run -d --name wawa-api -p 8080:80 wawa-api:0.1.0
 
 .PHONY: clean
 clean:
